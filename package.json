@@ -11,9 +11,11 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "bent": "^7.3.12",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "flat-cache": "^3.0.4",
     "node-fetch": "^2.6.1",
     "zksync-crypto": "^0.5.4"
   },

@@ -15,7 +15,6 @@ const cachedFetch = (url, options) => {
     let cachedContent = cache.getKey(cacheKey)
     if(cachedContent != null)
     {
-        console.log(`cache found for key ${cacheKey}`)
         let response = new Response(new Blob([cachedContent]))
         return Promise.resolve(response)
     }
@@ -24,14 +23,10 @@ const cachedFetch = (url, options) => {
         //  Only cache non binary content
         if(response.status === 200)
         {
-            console.log(`positive response status 200`)
             let ctx = response.headers.get('Content-Type')
-            console.log(ctx)
             if(ctx && (ctx.match(/application\/json/i) || ctx.match(/text\//i)))
             {
-                console.log('content type was text or json')
                 response.clone().text().then(content => {
-                    console.log(content)
                     cache.setKey(cacheKey, content)
                 })
             }

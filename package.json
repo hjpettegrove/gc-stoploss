@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node --trace-warnings src/server.js"
   },
   "keywords": [],
   "author": "Harold <hjpettegrove@gmail.com> (https://hjpettegrove.com/)",

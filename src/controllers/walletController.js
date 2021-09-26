@@ -2,6 +2,8 @@ import cachedFetch from '../helpers/cachedFetch.js'
 import cachedFetchWithErrorHandling from '../helpers/cachedFetchWithErrorHandling.js';
 import ZKSwapApiRoute from '../services/zkswap-endpoints/zkswap_api_route.js';
 
+
+// New comment
 const getWalletBalance = async (req, res) => {
     let wallet_balance = {
         wallet: {

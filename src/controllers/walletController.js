@@ -25,14 +25,16 @@ const getWalletBalance = async (req, res) => {
     
     const account_balance_route = new ZKSwapApiRoute('https://api.zks.app/v2/:network/account/:address/balances')
     account_balance_route.setAddress(walletAddress)
-    
-
     const account_data = await cachedFetchWithErrorHandling(account_balance_route.endpoint)
+    
     const zks_api_url_tokens = new ZKSwapApiRoute('https://api.zks.app/v2/:network/tokens')
     const token_data = await cachedFetchWithErrorHandling(zks_api_url_tokens.endpoint)
  
     const zks_api_pair_data = new ZKSwapApiRoute('https://api.zks.app/v2/:network/pairs')
     const pair_data = await cachedFetchWithErrorHandling(zks_api_pair_data.endpoint)
+
+    const zks_api_token_prices = new ZKSwapApiRoute('http://api.zks.app/v2/:network/tokens/price')
+    const token_prices = await cachedFetchWithErrorHandling(zks_api_token_prices.endpoint)
 
     console.log(account_data);
     // FIXME - clean this up, some type of object merge should work here
@@ -47,11 +49,13 @@ const getWalletBalance = async (req, res) => {
         const id = account_data.data.balances.tokens[i].id;
         const token = token_data.data.find((t)=> { if(t.id === id) return t;}); 
         const amount = account_data.data.balances.tokens[i].amount;
+        const usdValue = token_prices.data.find((t) => {if(t.id === id) return t;})
         const temp_data = {
             id: id,
             symbol: token.symbol,
             icon: token.icon,
             amount: amount,
+            value_usd: amount*usdValue.price
         }
         wallet_balance.wallet.assets.tokens.push(temp_data)
     }

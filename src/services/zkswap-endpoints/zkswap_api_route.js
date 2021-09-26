@@ -11,7 +11,7 @@ export default class ZKSwapApiRoute
 
     /**
      * 
-     * @param {integer} network - 1 for mainnet or
+     * @param {integer} network - 1 for mainnet or 3 for testnet
      */
     setNetwork(network = 1)
     {

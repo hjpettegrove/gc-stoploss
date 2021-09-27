@@ -2,6 +2,7 @@ import cachedFetch from '../helpers/cachedFetch.js'
 import cachedFetchWithErrorHandling from '../helpers/cachedFetchWithErrorHandling.js';
 import ZKSwapApiRoute from '../services/zkswap-endpoints/zkswap_api_route.js';
 
+
 const getWalletBalance = async (req, res) => {
     let wallet_balance = {
         wallet: {
@@ -20,7 +21,7 @@ const getWalletBalance = async (req, res) => {
     let networkId = Number.parseInt(req.params.network,10)
     let walletAddress = req.params.address.toString()
 
-    //TODO - Implement better solution for three web queries
+    //TODO - Implement better solution for four!!!! API queries
     // There is a more elegant way to solve this.  Go back to the nodejs design patterns book and look at concurrency solutions
     
     const account_balance_route = new ZKSwapApiRoute('https://api.zks.app/v2/:network/account/:address/balances')
